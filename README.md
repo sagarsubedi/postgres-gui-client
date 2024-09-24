@@ -1,40 +1,45 @@
-# Welcome to Remix!
+# Postgres GUI
 
-- 📖 [Remix docs](https://remix.run/docs)
+Postgres GUI is a powerful and intuitive GUI client for PostgreSQL, built with RemixJS. It features authentication via Logto, which can be self-hosted or used via the cloud. Users can also opt to run the app locally without authentication. Inspired by Supabase's table editor UI, Postgres GUI aims to provide a seamless experience for managing PostgreSQL databases.
 
-## Development
+## Features
 
-Run the dev server:
+- **Authentication**: Easily integrate with Logto for secure access.
+- **Table Editor**: Intuitive UI for managing PostgreSQL tables.
+- **Customizable**: Use with or without authentication.
 
-```shellscript
-npm run dev
-```
+## Getting Started
+
+### Prerequisites
+
+- Node.js
+- PostgreSQL
+
+### Installation
+
+1. Clone the repository:
+    ```sh
+    git clone <repository-url>
+    ```
+
+2. Install dependencies:
+    ```sh
+    npm install
+    ```
+
+3. Copy the content of `.env.example` to `.env` and replace with actual variables.
+
+4. Start the Remix server:
+    ```sh
+    npm run dev
+    ```
+
+5. Visit `http://localhost:5173` in your browser.
 
 ## Deployment
 
-First, build your app for production:
+Documentation for self-hosting will be available soon.
 
-```sh
-npm run build
-```
+## License
 
-Then run the app in production mode:
-
-```sh
-npm start
-```
-
-Now you'll need to pick a host to deploy it to.
-
-### DIY
-
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-- `build/server`
-- `build/client`
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever css framework you prefer. See the [Vite docs on css](https://vitejs.dev/guide/features.html#css) for more information.
+This project is licensed under the MIT License.
