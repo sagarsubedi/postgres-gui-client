@@ -1,12 +1,15 @@
 import { LogtoContext } from "@logto/remix";
 import { json, LoaderFunction, redirect } from "@remix-run/node";
 import { logto } from "../../service/auth.server";
-import { Form } from "@remix-run/react";
+import { Form, useLoaderData } from "@remix-run/react";
 import { Button } from "../components/ui/button";
 import Sidebar from "../components/domain/sidebar";
+import { prisma } from "../../service/prisma.server";
+import { Table } from "../../service/types";
 
 type LoaderResponse = {
   readonly context: LogtoContext;
+  readonly tables: Table[];
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
@@ -15,19 +18,21 @@ export const loader: LoaderFunction = async ({ request }) => {
   if (!context.isAuthenticated) {
     return redirect("/api/logto/sign-in");
   }
-  return json<LoaderResponse>({ context });
+
+  const tables = await prisma.$queryRaw<Table[]>`
+    SELECT table_name
+    FROM information_schema.tables
+    WHERE table_schema = 'public'
+  `;
+
+  return json<LoaderResponse>({
+    context,
+    tables: tables,
+  });
 };
 
-const tables = [
-  "analytics",
-  "chapters",
-  "questions",
-  "subscriptions",
-  "user_answers",
-  "user_progress",
-  "user_streaks",
-];
 export default function Gui() {
+  const { tables } = useLoaderData<LoaderResponse>();
   return (
     <div>
       <Sidebar tables={tables} />
